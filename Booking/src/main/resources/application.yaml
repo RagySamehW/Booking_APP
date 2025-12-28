@@ -1,0 +1,15 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/Automotive_System
+    username: postgres
+    password: Newlife2025
+
+  liquibase:
+    enabled: false  # or true if you use it
+
+  webflux:
+    problem:
+      include-message=always:
+
+server:
+  port: 8081
