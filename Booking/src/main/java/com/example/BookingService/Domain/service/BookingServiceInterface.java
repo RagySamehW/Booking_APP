@@ -15,4 +15,6 @@ public interface BookingServiceInterface {
     Flux<BookingResponseDTO> getBookingsByCarId(Long carId);
     Mono<BookingResponseDTO> rescheduleBooking(Long oldBookingId, LocalDate newDate, String newComments);
     Mono<BookingResponseDTO> cancelBooking(Long bookingId);
+    Mono<BookingResponseDTO> getLastBookingByCarId(Long carId);
+
 }

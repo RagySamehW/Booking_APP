@@ -24,6 +24,13 @@ public class CustomerService implements CustomerServiceInterface {
     }
 
     @Override
+    public Mono<CustomerResponse> getCustomerByPhone(String phone) {
+        return repository.findByPhone(phone)
+                .map(CustomerMapper::toDomain)
+                .map(CustomerMapper::toResponse);
+    }
+
+    @Override
     public Mono<CustomerResponse> createCustomer(CustomerRequest request) {
         CustomerEntity entity = new CustomerEntity();
         entity.setName(request.getName());

@@ -14,4 +14,6 @@ public interface CustomerServiceInterface {
     Flux<CustomerResponse> getAllCustomers();
     Mono<CustomerResponse> updateCustomer(UUID id, CustomerRequest request);
     Mono<Void> deleteCustomer(UUID id);
+    Mono<CustomerResponse> getCustomerByPhone(String phone);
+
 }

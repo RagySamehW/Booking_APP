@@ -25,4 +25,7 @@ public interface BookingRepository
 
     @Query("SELECT * FROM booking WHERE car_id = :carId ORDER BY booking_date DESC LIMIT :limit")
     Flux<BookingEntity> findLastBookings(Long carId, int limit);
+
+    Mono<BookingEntity> findTopByCarIdOrderByCreatedAtDesc(Long carId);
+
 }
