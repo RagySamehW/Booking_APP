@@ -12,7 +12,7 @@ public class BookingMapper {
         BookingEntity entity = new BookingEntity(); // ✔ no-args
 
         entity.setService_id(dto.getService_id());
-        entity.setCar_id(dto.getCar_id());
+        entity.setCarId(dto.getCar_id());
         entity.setBranch_id(dto.getBranch_id());
         entity.setComments(dto.getComments());
 
@@ -22,7 +22,7 @@ public class BookingMapper {
         BookingModel model = new BookingModel();
         model.setId(entity.getBooking_id());
         model.setService_id(entity.getService_id());
-        model.setCar_id(entity.getCar_id());
+        model.setCar_id(entity.getCarId());
         model.setBranch_id(entity.getBranch_id());
         model.setBooking_date(entity.getBooking_date());
 
@@ -38,7 +38,7 @@ public class BookingMapper {
         BookingEntity entity = new BookingEntity();
         entity.setBooking_id(model.getId());
         entity.setService_id(model.getService_id());
-        entity.setCar_id(model.getCar_id());
+        entity.setCarId(model.getCar_id());
         entity.setBranch_id(model.getBranch_id());
         entity.setBooking_date(model.getBooking_date());
         entity.setComments(model.getComments());

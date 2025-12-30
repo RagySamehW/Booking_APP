@@ -48,6 +48,20 @@ public class BookingService implements BookingServiceInterface {
         }
         return count;
     }
+    @Override
+    public Mono<BookingResponseDTO> getLastBookingByCarId(Long carId) {
+
+        return bookingRepository
+                .findTopByCarIdOrderByCreatedAtDesc(carId)
+                .switchIfEmpty(Mono.error(
+                        new ResponseStatusException(
+                                NOT_FOUND,
+                                "No bookings found for this car."
+                        )
+                ))
+                .map(bookingMapper::toDomain)
+                .map(bookingMapper::toDto);
+    }
 
     private Mono<List<LocalDate>> findClosestAvailableDates(
             Long branchId,
@@ -133,7 +147,7 @@ public class BookingService implements BookingServiceInterface {
                         return Mono.error(() -> new IllegalStateException("Only PENDING bookings can be rescheduled."));
                     }
 
-                    return bookingRepository.findLastBookings(oldBookingEntity.getCar_id(), 3)
+                    return bookingRepository.findLastBookings(oldBookingEntity.getCarId(), 3)
                             .map(bookingMapper::toDomain)
                             .collectList()
                             .flatMap(bookings -> {
@@ -176,7 +190,7 @@ public class BookingService implements BookingServiceInterface {
                                             // Step 3: Create new booking
                                             BookingEntity newBookingEntity = new BookingEntity(
                                                     oldBookingEntity.getService_id(),
-                                                    oldBookingEntity.getCar_id(),
+                                                    oldBookingEntity.getCarId(),
                                                     oldBookingEntity.getBranch_id(),
                                                     chosenDate,
                                                     newComments

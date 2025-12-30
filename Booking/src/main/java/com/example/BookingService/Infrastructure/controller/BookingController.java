@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import java.time.LocalDate;
@@ -25,13 +26,11 @@ public class BookingController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<BookingResponseDTO> createBooking(@RequestBody BookingRequestDTO request) {
-        // The service returns a Mono<BookingDTO>, which Spring WebFlux handles automatically
         return bookingService.createBooking(request);
     }
 
     @GetMapping("/car/{carId}")
     public Flux<BookingResponseDTO> getBookingsByCarId(@PathVariable Long carId) {
-        // The service returns a Flux<BookingDTO>, which Spring WebFlux handles automatically
         return bookingService.getBookingsByCarId(carId);
     }
 
@@ -59,4 +58,16 @@ public class BookingController {
     public Mono<BookingResponseDTO> cancelBooking(@PathVariable Long bookingId) {
         return bookingService.cancelBooking(bookingId);
     }
+
+    @GetMapping("/last/{carId}")
+    public Mono<BookingResponseDTO> getLastBooking(@PathVariable Long carId) {
+        return bookingService.getLastBookingByCarId(carId)
+                .switchIfEmpty(Mono.error(
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "No bookings found for car ID " + carId
+                        )
+                ));
+    }
+
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
@@ -18,7 +19,8 @@ public class BookingEntity {
     @Id
     private Long booking_id;
     private Long service_id;
-    private Long car_id;
+    @Column("car_id")
+    private Long carId;
     private Long branch_id;
     private LocalDate booking_date;
     private Long status_id;
@@ -29,7 +31,7 @@ public class BookingEntity {
 
     public BookingEntity(Long service_id, Long car_id, Long branch_id, LocalDate booking_date, String comments) {
         this.service_id = service_id;
-        this.car_id = car_id;
+        this.carId = car_id;
         this.branch_id = branch_id;
         this.booking_date = booking_date;
         this.status_id = 1L;
