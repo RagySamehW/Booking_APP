@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="customer-service" />
+        <module name="demo" />
       </profile>
       <profile name="Annotation profile for Booking-Service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -24,6 +25,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Booking-Service" options="-parameters" />
       <module name="customer-service" options="-parameters" />
+      <module name="demo" options="-parameters" />
     </option>
   </component>
 </project>
