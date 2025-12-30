@@ -30,6 +30,12 @@ public class CustomerController {
     public Mono<CustomerResponse> getCustomer(@PathVariable UUID id) {
         return service.getCustomer(id);
     }
+    @GetMapping("/phone/{phone}")
+    public Mono<ResponseEntity<CustomerResponse>> getCustomerByPhone(@PathVariable String phone) {
+        return service.getCustomerByPhone(phone)
+                .map(ResponseEntity::ok)                    // 200 if found
+                .defaultIfEmpty(ResponseEntity.notFound().build());  // 404 if empty
+    }
 
     @GetMapping
     public Flux<CustomerResponse> getAllCustomers() {
