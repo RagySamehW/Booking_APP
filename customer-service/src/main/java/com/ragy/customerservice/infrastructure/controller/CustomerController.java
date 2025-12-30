@@ -33,8 +33,8 @@ public class CustomerController {
     @GetMapping("/phone/{phone}")
     public Mono<ResponseEntity<CustomerResponse>> getCustomerByPhone(@PathVariable String phone) {
         return service.getCustomerByPhone(phone)
-                .map(ResponseEntity::ok)                    // 200 if found
-                .defaultIfEmpty(ResponseEntity.notFound().build());  // 404 if empty
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
     @GetMapping

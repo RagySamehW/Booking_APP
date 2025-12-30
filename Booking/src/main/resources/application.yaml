@@ -5,7 +5,7 @@ spring:
     password: Newlife2025
 
   liquibase:
-    enabled: false  # or true if you use it
+    enabled: false
 
   webflux:
     problem:

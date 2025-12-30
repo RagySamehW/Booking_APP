@@ -1,30 +1,15 @@
-#spring:
-#  application:
-#    name: customer-service
-#  datasource:
-#    url: jdbc:postgresql://localhost:5433/customers
-#    username: postgres
-#    password: toor
-#
-#  jpa:
-#    hibernate:
-#      ddl-auto: none
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        format_sql: true
-#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/Automotive_System
+    username: postgres
+    password: Newlife2025
+
+  liquibase:
+    enabled: false
+
+  webflux:
+    problem:
+      include-message=always:
 
 server:
-  address: 0.0.0.0
-  port: 8080
-
-spring:
-  application:
-    name: customer-service
-
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5433/customers
-    username: postgres
-    password: toor
-
+  port: 8082
